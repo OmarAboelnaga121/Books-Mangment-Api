@@ -1,9 +1,83 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0" version="26.2.7">
-  <diagram name="Page-1" id="vPQfznAPrhqFf1_y30xD">
-    <mxGraphModel>
+<mxfile host="app.diagrams.net">
+  <diagram name="Book Management Frontend Flow" id="vPQfznAPrhqFf1_y30xD">
+    <mxGraphModel dx="1234" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Customer Role -->
+        <mxCell id="cust_label" value="Customer Role" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="100" y="20" width="120" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="cust_landing" value="Landing Page" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="70" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="cust_login" value="Login" style="shape=parallelogram;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="140" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="cust_register" value="Register" style="shape=parallelogram;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="140" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="cust_books" value="Books Dashboard" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="210" width="120" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="cust_specific" value="Specific Book" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="280" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="cust_user" value="User Dashboard" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="280" width="120" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- Arrows for Customer Role -->
+        <mxCell style="endArrow=block;html=1;" edge="1" parent="1" source="cust_landing" target="cust_login"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="endArrow=block;html=1;" edge="1" parent="1" source="cust_landing" target="cust_register"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="endArrow=block;html=1;" edge="1" parent="1" source="cust_login" target="cust_books"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="endArrow=block;html=1;" edge="1" parent="1" source="cust_register" target="cust_books"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="endArrow=block;html=1;" edge="1" parent="1" source="cust_books" target="cust_specific"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="endArrow=block;html=1;" edge="1" parent="1" source="cust_books" target="cust_user"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Book Seller Role -->
+        <!-- Same pattern, shifted right -->
+
+        <mxCell id="seller_label" value="Books Seller Role" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="350" y="20" width="140" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="seller_landing" value="Landing Page" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="70" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="seller_login" value="Login" style="shape=parallelogram;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="140" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="seller_register" value="Register" style="shape=parallelogram;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="140" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="seller_books" value="Books Dashboard" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="210" width="120" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="seller_specific" value="Specific Book" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="280" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="seller_user" value="User Dashboard" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="280" width="120" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="seller_books_list" value="Seller Books" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="350" width="120" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- Arrows -->
+        <mxCell style="endArrow=block;" edge="1" parent="1" source="seller_landing" target="seller_login"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="endArrow=block;" edge="1" parent="1" source="seller_landing" target="seller_register"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="endArrow=block;" edge="1" parent="1" source="seller_login" target="seller_books"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="endArrow=block;" edge="1" parent="1" source="seller_register" target="seller_books"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="endArrow=block;" edge="1" parent="1" source="seller_books" target="seller_specific"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="endArrow=block;" edge="1" parent="1" source="seller_books" target="seller_user"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell style="endArrow=block;" edge="1" parent="1" source="seller_books" target="seller_books_list"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Admin Role -->
+        <!-- Same pattern, shifted further right -->
+
+        <!-- Repeat similar blocks with different IDs for Admin Role... -->
+
       </root>
     </mxGraphModel>
   </diagram>
