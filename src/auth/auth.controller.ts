@@ -8,7 +8,6 @@ import { loginDto } from './dto/login.dto';
 import { registerDto } from './dto/register.dto';
 
 @Controller('auth')
-// @UseGuards(AuthGuard('jwt'))
 @UseGuards(ThrottlerGuard)
 
 export class AuthController {

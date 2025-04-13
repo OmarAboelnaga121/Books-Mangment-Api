@@ -4,9 +4,11 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { UserModule } from './user/user.module';
 
 @Module({
-  imports: [MongoDbModule,
+  imports: [
+    MongoDbModule,
     ConfigModule.forRoot({
       isGlobal: true
     }),
@@ -15,6 +17,7 @@ import { APP_GUARD } from '@nestjs/core';
       ttl: 600, 
       limit: 10,
     }]),
+    UserModule,
 
   ],
   controllers: [],

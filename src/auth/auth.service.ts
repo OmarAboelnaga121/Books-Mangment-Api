@@ -5,12 +5,14 @@ import { userDto } from './dto/user.dto';
 import * as argon from 'argon2';
 import { loginDto } from './dto/login.dto';
 import { registerDto } from './dto/register.dto';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
     // Constructor
     constructor(
         @Inject('User') private readonly userModel: Model<IUser>,
+        private jwtService : JwtService
     ) {}
 
     // Register User
@@ -33,7 +35,7 @@ export class AuthService {
     }
 
     // Login to registed user
-    async loginUser(user: loginDto): Promise<loginDto> {
+    async loginUser(user: loginDto): Promise<string> {
         // Check if user mail already exists
         const checkUser = await this.userModel.findOne({ email: user.email });
         
@@ -47,9 +49,18 @@ export class AuthService {
         if (!passwordMatch) {
             throw new BadRequestException('Invalid Credentials');
         }
+        
+        // Genrate JWT Token
+        const token = this.tokenGenrator(checkUser);
 
-        return checkUser;
+        return token;
     }
-    // Logout user
+
     // JWT Token Generation
+    private tokenGenrator(user: any) {
+        const payload = { email: user.email, sub: user.id };
+                
+        return this.jwtService.sign(payload);
+    }
+
 }
