@@ -5,13 +5,19 @@ import { MongoDbModule } from 'src/mongo-db/mongo-db.module';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports:[
     MongoDbModule,
-    JwtModule.register({
-        secret: process.env.JWT_SECRET,
+    ConfigModule,
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'),
         signOptions: { expiresIn: '1d' },
+      }),
     }),
 
   ],
