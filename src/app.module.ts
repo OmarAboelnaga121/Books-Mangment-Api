@@ -5,6 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { UserModule } from './user/user.module';
+import { BooksModule } from './books/books.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UserModule } from './user/user.module';
       limit: 10,
     }]),
     UserModule,
+    BooksModule,
 
   ],
   controllers: [],

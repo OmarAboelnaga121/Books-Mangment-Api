@@ -7,12 +7,10 @@ export const BookSchema = new Schema({
     contentUrl: { type: String, required: false },
     status: { 
         type: String, 
-        enum: ['PENDING', 'APPROVED', 'REJECTED'], 
+        enum: ['PENDING', 'APPROVED'], 
         required: true 
     },
     sellerId: { type: String, required: true },
-    seller: { type: Schema.Types.Mixed, required: true },
-    request: { type: Schema.Types.Mixed, required: false },
     },
     {
         timestamps: true, 
