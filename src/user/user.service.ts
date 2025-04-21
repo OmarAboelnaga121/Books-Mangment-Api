@@ -1,6 +1,5 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { userDto } from 'src/auth/dto/user.dto';
 import { IUser } from 'src/mongo-db/user.interface';
 import { UserUpdateDto } from './dto/userUpdate.dto';
 

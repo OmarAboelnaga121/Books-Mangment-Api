@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ThrottlerGuard } from '@nestjs/throttler';
 import { BooksService } from './books.service';
@@ -17,9 +17,9 @@ export class BooksController {
     ) {}
 
     // Get Books
-    @Get('/books')
-    @ApiOperation({ summary: 'Get All Approved Books' })
+    @Get('')
     @ApiBearerAuth()
+    @ApiOperation({ summary: 'Get All Approved Books' })
     @ApiResponse({ status: 200, description: 'All Books' })
     @ApiResponse({ status: 401, description: 'Unauthorized' })
     @ApiResponse({ status: 500, description: 'Internal Server Error' })
@@ -27,17 +27,40 @@ export class BooksController {
         return this.booksService.getBooks();
     }
     // Get Book by ID
+    @Get('/books/:id')
+    @ApiBearerAuth()
+    @ApiOperation({ summary: 'Get Book by ID' })
+    @ApiResponse({ status: 200, description: 'All Books' })
+    @ApiResponse({ status: 401, description: 'Unauthorized' })
+    @ApiResponse({ status: 500, description: 'Internal Server Error' })
+    async getBookById(@Param('id') id : string) {
+        return this.booksService.getBookById(id);
+    }
+
     // Create Book
-    @Post('/books')
+    @Post('/book')
     @ApiOperation({ summary: 'Create Book' })
     @ApiBearerAuth()
-    @ApiResponse({ status: 200, description: 'All Books' })
+    @ApiResponse({ status: 200, description: 'Single Book By Id' })
     @ApiResponse({ status: 401, description: 'Unauthorized' })
     @ApiResponse({ status: 500, description: 'Internal Server Error' })
     @ApiBody({ type: BooksDto })
     async createBooks(@Body() bookData: BooksDto, @userProfile() user : userDto) {
         return this.booksService.createBook(bookData, user.id);
     }
+    
+    // Get User Books
+    @Get('/user')
+    @ApiOperation({ summary: 'Get User Books' })
+    @ApiBearerAuth()
+    @ApiResponse({ status: 200, description: 'User Books' })
+    @ApiResponse({ status: 400, description: 'Bad Request' })
+    @ApiResponse({ status: 401, description: 'Unauthorized' })
+    @ApiResponse({ status: 500, description: 'Internal Server Error' })
+    async getUserBooks(@userProfile() user : userDto) {        
+        return this.booksService.getUserBooks(user.id);
+    }
+
     // Update Book
     // Delete Book
     // Download Book

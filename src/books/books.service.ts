@@ -14,14 +14,19 @@ export class BooksService {
 
     // Get Books
     async getBooks(){
-        const books = await this.bookModel.aggregate([
-            { $match: { status: 'APPROVED' } },
-            { $sample: { size: 1 } }
-        ]);
+        const books = await this.bookModel.find({ status: 'APPROVED' });
 
         return books;
     }
     // Get Book by ID
+    async getBookById(id: string) {
+        const book = await this.bookModel.findById(id);
+
+        if (!book) {
+            throw new BadRequestException('Book not found');
+        }
+        return book;
+    }
 
     // Create Book
     async createBook(bookData: BooksDto, userId : string) {
@@ -35,7 +40,7 @@ export class BooksService {
         const book = await this.bookModel.create({
             ...bookData,
             sellerId: userId,
-            status: 'APPROVED',
+            status: 'PENDING',
         });
 
         // Update User
@@ -53,6 +58,25 @@ export class BooksService {
         return book;
     }
 
+    // Get User Books
+    async getUserBooks(userId: string) {
+        // Check if user exists
+        const user = await this.userModel.findById(userId);
+        if (!user) {
+            throw new BadRequestException('User not found');
+        }
+
+        
+
+        // get user books
+        const books = await this.bookModel.find({ sellerId: userId });
+        if (!books) {
+            return [];
+        }
+
+        // return user books
+        return books;
+    }
     // Update Book
     // Delete Book
     // Download Book

@@ -2,7 +2,6 @@ import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ThrottlerGuard } from '@nestjs/throttler';
 import { AuthService } from './auth.service';
-import { userDto } from './dto/user.dto';
 import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { loginDto } from './dto/login.dto';
 import { registerDto } from './dto/register.dto';

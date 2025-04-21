@@ -1,7 +1,6 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { IUser } from 'src/mongo-db/user.interface';
-import { userDto } from './dto/user.dto';
 import * as argon from 'argon2';
 import { loginDto } from './dto/login.dto';
 import { registerDto } from './dto/register.dto';

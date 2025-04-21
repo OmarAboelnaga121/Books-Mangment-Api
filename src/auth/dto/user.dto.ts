@@ -15,11 +15,6 @@ export class userDto {
     @IsEmail({}, { message: 'Invalid email' })
     email: string;
 
-    @ApiProperty({ description: 'The password of the user' })
-    @IsString()
-    @IsStrongPassword()
-    password: string;
-
     @ApiProperty({ description: 'The role of the user' })
     @IsString()
     role: string;
