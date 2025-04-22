@@ -6,6 +6,7 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { UserModule } from './user/user.module';
 import { BooksModule } from './books/books.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { BooksModule } from './books/books.module';
     }]),
     UserModule,
     BooksModule,
+    CloudinaryModule,
 
   ],
   controllers: [],

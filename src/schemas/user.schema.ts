@@ -26,8 +26,11 @@ export const UserSchema = new Schema(
         books:{
             type: [String],
             default: [],
+        },
+        profileImageUrl:{
+            type: String,
+            default: '',
         }
-        
     },
     {
         timestamps: true, // Automatically adds createdAt and updatedAt fields

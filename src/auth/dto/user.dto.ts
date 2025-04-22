@@ -23,4 +23,8 @@ export class userDto {
     @IsString()
     @IsOptional()
     books: string[];
+
+    @ApiProperty({ description: 'The Profile Image Url of the user' })
+    @IsString()
+    profileImageUrl: string;
 }

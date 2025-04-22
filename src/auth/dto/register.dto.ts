@@ -19,4 +19,8 @@ export class registerDto {
     @ApiProperty({ description: 'The role of the user' })
     @IsString()
     role: string;
+
+    @ApiProperty({ description: 'The Profile Image Url of the user' })
+    @IsString()
+    profileImageUrl: string;
 }

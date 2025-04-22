@@ -1,10 +1,11 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ThrottlerGuard } from '@nestjs/throttler';
 import { AuthService } from './auth.service';
 import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { loginDto } from './dto/login.dto';
 import { registerDto } from './dto/register.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('auth')
 @UseGuards(ThrottlerGuard)
@@ -19,8 +20,10 @@ export class AuthController {
     @ApiResponse({ status: 201, description: 'User successfully registered.' })
     @ApiResponse({ status: 400, description: 'Bad Request.' })
     @ApiBody({ type: registerDto })
-    async register(@Body() registerDto: registerDto) {
-        return this.authService.registerUser(registerDto);
+    @UseInterceptors(FileInterceptor('file'))
+
+    async register(@Body() registerDto: registerDto, @UploadedFile() file: Express.Multer.File) {
+        return this.authService.registerUser(registerDto, file);
     }
 
     // Login User

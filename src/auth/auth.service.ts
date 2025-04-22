@@ -5,17 +5,19 @@ import * as argon from 'argon2';
 import { loginDto } from './dto/login.dto';
 import { registerDto } from './dto/register.dto';
 import { JwtService } from '@nestjs/jwt';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Injectable()
 export class AuthService {
     // Constructor
     constructor(
         @Inject('User') private readonly userModel: Model<IUser>,
-        private jwtService : JwtService
+        private jwtService : JwtService,
+        private cloudnaryService : CloudinaryService
     ) {}
 
     // Register User
-    async registerUser(user: registerDto): Promise<registerDto> {
+    async registerUser(user: registerDto, file: Express.Multer.File): Promise<registerDto> {
         // Check if user mail already exists
         const checkUser = await this.userModel.findOne({ email: user.email });
         
@@ -26,6 +28,13 @@ export class AuthService {
         // Hash password
         const hashPassword = await argon.hash(user.password);
         user.password = hashPassword;
+
+        // Upload image to cloudinary
+        const uploadImage = await this.cloudnaryService.uploadFile(file);
+        if (!uploadImage) {
+            throw new BadRequestException('Image upload failed');
+        }
+        user.profileImageUrl = uploadImage.secure_url;
 
         // Create new user
         const newUser = new this.userModel(user);

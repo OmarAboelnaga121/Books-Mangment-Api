@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Param, Post, UploadedFile, UploadedFiles, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ThrottlerGuard } from '@nestjs/throttler';
 import { BooksService } from './books.service';
@@ -6,6 +6,7 @@ import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagg
 import { BooksDto } from './dto/books.dto';
 import { userProfile } from 'src/auth/decorators/user.decorator';
 import { userDto } from 'src/auth/dto/user.dto';
+import { FileFieldsInterceptor, FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('books')
 @UseGuards(AuthGuard('jwt'))
@@ -13,7 +14,7 @@ import { userDto } from 'src/auth/dto/user.dto';
 export class BooksController {
     // Constructor
     constructor(
-        private booksService : BooksService
+        private booksService : BooksService,
     ) {}
 
     // Get Books
@@ -45,8 +46,40 @@ export class BooksController {
     @ApiResponse({ status: 401, description: 'Unauthorized' })
     @ApiResponse({ status: 500, description: 'Internal Server Error' })
     @ApiBody({ type: BooksDto })
-    async createBooks(@Body() bookData: BooksDto, @userProfile() user : userDto) {
-        return this.booksService.createBook(bookData, user.id);
+    @UseInterceptors(
+        FileFieldsInterceptor([
+          { name: 'bookImage', maxCount: 1 },
+          { name: 'bookContent', maxCount: 1 },
+        ])
+      )
+    async createBooks(
+        @Body() bookData: BooksDto,
+        @userProfile() user : userDto, 
+        @UploadedFiles() files: { 
+            bookImage?: Express.Multer.File[], 
+            bookContent?: Express.Multer.File[] 
+        }
+    ) { 
+        const bookImage = files.bookImage?.[0];
+        const bookContent = files.bookContent?.[0];
+
+        // Validate file presence
+        if (!bookImage || !bookContent) {
+            throw new BadRequestException('Book image and content are required');
+        }
+
+        // Validate image type
+        const allowedImageTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+        if (!allowedImageTypes.includes(bookImage.mimetype)) {
+            throw new BadRequestException('Invalid image type. Only JPG, JPEG and PNG are allowed');
+        }
+
+        // Validate PDF type
+        if (bookContent.mimetype !== 'application/pdf') {
+            throw new BadRequestException('Invalid content type. Only PDF files are allowed');
+        }
+
+        return this.booksService.createBook(bookData, user.id, bookImage, bookContent);
     }
     
     // Get User Books

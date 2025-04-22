@@ -3,13 +3,15 @@ import { Model } from 'mongoose';
 import { BookI } from 'src/mongo-db/book.interface';
 import { IUser } from 'src/mongo-db/user.interface';
 import { BooksDto } from './dto/books.dto';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Injectable()
 export class BooksService {
     // Constructor
     constructor(
         @Inject('Books') private bookModel : Model<BookI>,
-        @Inject('User') private userModel: Model<IUser>
+        @Inject('User') private userModel: Model<IUser>,
+        private cloudnaryService : CloudinaryService
     ) {}
 
     // Get Books
@@ -29,7 +31,7 @@ export class BooksService {
     }
 
     // Create Book
-    async createBook(bookData: BooksDto, userId : string) {
+    async createBook(bookData: BooksDto, userId : string, bookImage: Express.Multer.File, bookContent: Express.Multer.File) {
         // Check User
         const checkUser = await this.userModel.findById(userId);
         if (!checkUser) {
@@ -42,6 +44,20 @@ export class BooksService {
             sellerId: userId,
             status: 'PENDING',
         });
+
+        // Upload Book Image
+        const uploadImage = await this.cloudnaryService.uploadFile(bookImage);
+        if (!uploadImage) {
+            throw new BadRequestException('Image upload failed');
+        }
+        book.coverUrl = uploadImage.secure_url;
+
+        // Upload The Book File
+        const uploadContent = await this.cloudnaryService.uploadFile(bookContent);
+        if (!uploadContent) {
+            throw new BadRequestException('Content upload failed');
+        }
+        book.contentUrl = uploadContent.secure_url;
 
         // Update User
         const updateUserBooks = await this.userModel.findByIdAndUpdate(
