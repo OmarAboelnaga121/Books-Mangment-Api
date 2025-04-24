@@ -4,6 +4,8 @@ import { BookI } from 'src/mongo-db/book.interface';
 import { IUser } from 'src/mongo-db/user.interface';
 import { BooksDto } from './dto/books.dto';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import { CreateBooksDto } from './dto/createBook.dto';
+import { updateStatusDto } from './dto/updateStatus.dto';
 
 @Injectable()
 export class BooksService {
@@ -31,7 +33,7 @@ export class BooksService {
     }
 
     // Create Book
-    async createBook(bookData: BooksDto, userId : string, bookImage: Express.Multer.File, bookContent: Express.Multer.File) {
+    async createBook(bookData: CreateBooksDto, userId : string, bookImage: Express.Multer.File) {
         // Check User
         const checkUser = await this.userModel.findById(userId);
         if (!checkUser) {
@@ -52,12 +54,7 @@ export class BooksService {
         }
         book.coverUrl = uploadImage.secure_url;
 
-        // Upload The Book File
-        const uploadContent = await this.cloudnaryService.uploadFile(bookContent);
-        if (!uploadContent) {
-            throw new BadRequestException('Content upload failed');
-        }
-        book.contentUrl = uploadContent.secure_url;
+        
 
         // Update User
         const updateUserBooks = await this.userModel.findByIdAndUpdate(
@@ -82,8 +79,6 @@ export class BooksService {
             throw new BadRequestException('User not found');
         }
 
-        
-
         // get user books
         const books = await this.bookModel.find({ sellerId: userId });
         if (!books) {
@@ -93,9 +88,96 @@ export class BooksService {
         // return user books
         return books;
     }
+
     // Update Book
+    async updateBook(id: string, userId: string, bookData: BooksDto) {
+        // Check if user exists
+        const user = await this.userModel.findById(userId);
+        if (!user) {
+            throw new BadRequestException('User not found');
+        }
+
+        // Check if book exists
+        const book = await this.bookModel.findById(id);
+        if (!book) {
+            throw new BadRequestException('Book not found');
+        }
+
+        // Check if book belongs to user
+        if (book.sellerId.toString() !== userId) {
+            throw new BadRequestException('You are not the owner of this book');
+        }
+
+        // Update Book
+        const updatedBook = await this.bookModel.findByIdAndUpdate(id, bookData, { new: true });
+
+        return updatedBook;
+    }
+
     // Delete Book
+    async deleteBook(id: string, userId: string) {
+        // Check if user exists
+        const user = await this.userModel.findById(userId);
+        if (!user) {
+            throw new BadRequestException('User not found');
+        }
+
+        // Check if book exists
+        const book = await this.bookModel.findById(id);
+        if (!book) {
+            throw new BadRequestException('Book not found');
+        }
+
+        // Check if book belongs to user
+        if (book.sellerId.toString() !== userId) {
+            throw new BadRequestException('You are not the owner of this book');
+        }
+
+        // Delete Book
+        await this.bookModel.findByIdAndDelete(id);
+
+        // Update User Books
+        await this.userModel.findByIdAndUpdate(
+            userId,
+            { $pull: { books: id } },
+            { new: true }
+        );
+
+        return { message: 'Book deleted successfully' };
+    }
     // Download Book
+
     // Book Requets
+    async booksOnRequest(){
+        const books = await this.bookModel.find({ status: 'PENDING' });
+
+        return books;
+    }
+
     // Accept Or Rejected Book Request
+    async updateBookStatus(id: string, userId: string, status: updateStatusDto) {
+        // Check if user exists
+        const user = await this.userModel.findById(userId);
+        if (!user) {
+            throw new BadRequestException('User not found');
+        }
+
+        // Check if book exists
+        const book = await this.bookModel.findById(id);
+        if (!book) {
+            throw new BadRequestException('Book not found');
+        }
+
+        // Check if book belongs to user
+        if (book.sellerId.toString() !== userId) {
+            throw new BadRequestException('You are not the owner of this book');
+        }
+
+        if(status.status) {
+            const updatedBook = await this.bookModel.findByIdAndUpdate(id, { status: 'APPROVED' }, { new: true });
+        } else {
+            this.deleteBook(id, userId);
+        }
+
+    }
 }
