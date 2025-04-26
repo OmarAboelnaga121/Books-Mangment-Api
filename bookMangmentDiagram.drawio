@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0" version="26.2.13">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0" version="26.2.14">
   <diagram name="Book Management Frontend Flow" id="vPQfznAPrhqFf1_y30xD">
-    <mxGraphModel dx="866" dy="474" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="864" dy="474" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -177,11 +177,6 @@
             <mxPoint x="180" y="970" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="exy9T7-MHV6MqLQcMehr-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="EfdEM8uuvntHlYLh4gwe-30" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="180" y="1010" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="EfdEM8uuvntHlYLh4gwe-30" value="Specific Book" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="40" y="970" width="100" height="40" as="geometry" />
         </mxCell>
@@ -253,9 +248,6 @@
         <mxCell id="exy9T7-MHV6MqLQcMehr-41" value="&lt;div&gt;/userProfile&lt;/div&gt;&lt;div&gt;GET&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="200" y="870" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="exy9T7-MHV6MqLQcMehr-42" value="/books/downlaod&lt;div&gt;GET&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="180" y="990" width="60" height="30" as="geometry" />
-        </mxCell>
         <mxCell id="exy9T7-MHV6MqLQcMehr-43" value="/books/book/:id&lt;div&gt;GET&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="180" y="950" width="60" height="30" as="geometry" />
         </mxCell>
@@ -286,20 +278,32 @@
         <mxCell id="h-NFPhccPEgFU3Ty7LLh-22" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.tick;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
           <mxGeometry x="260" y="850" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="bewZU5svssob48AYSBzr-21" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.tick;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+        <mxCell id="bewZU5svssob48AYSBzr-21" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.tick;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
           <mxGeometry x="280" y="1105" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="bewZU5svssob48AYSBzr-22" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.tick;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+        <mxCell id="bewZU5svssob48AYSBzr-22" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.tick;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
           <mxGeometry x="260" y="790" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="bewZU5svssob48AYSBzr-23" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.tick;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+        <mxCell id="bewZU5svssob48AYSBzr-23" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.tick;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
           <mxGeometry x="280" y="1055" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="bewZU5svssob48AYSBzr-24" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.tick;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+        <mxCell id="bewZU5svssob48AYSBzr-24" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.tick;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
           <mxGeometry x="260" y="890" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="bewZU5svssob48AYSBzr-25" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.tick;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+        <mxCell id="bewZU5svssob48AYSBzr-25" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.tick;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
           <mxGeometry x="250" y="940" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="FOub0hj2C16T9PL_jVDp-25" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.tick;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="394" y="1035" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="FOub0hj2C16T9PL_jVDp-26" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.tick;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="400" y="1145" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="FOub0hj2C16T9PL_jVDp-27" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.tick;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="300" y="1170" width="40" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="FOub0hj2C16T9PL_jVDp-28" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.tick;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="310" y="1204" width="40" height="45" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
