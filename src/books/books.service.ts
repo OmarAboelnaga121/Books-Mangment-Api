@@ -6,6 +6,7 @@ import { BooksDto } from './dto/books.dto';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { CreateBooksDto } from './dto/createBook.dto';
 import { updateStatusDto } from './dto/updateStatus.dto';
+import { UploadcareService } from 'src/upload-care/upload-care.service';
 
 @Injectable()
 export class BooksService {
@@ -13,8 +14,8 @@ export class BooksService {
     constructor(
         @Inject('Books') private bookModel : Model<BookI>,
         @Inject('User') private userModel: Model<IUser>,
-        private cloudnaryService : CloudinaryService
-    ) {}
+        private cloudnaryService : CloudinaryService,
+        private readonly uploadcareService: UploadcareService,    ) {}
 
     // Get Books
     async getBooks(){
@@ -33,7 +34,7 @@ export class BooksService {
     }
 
     // Create Book
-    async createBook(bookData: CreateBooksDto, userId : string, bookImage: Express.Multer.File) {
+    async createBook(bookData: CreateBooksDto, userId : string, bookImage: Express.Multer.File, pdf: Express.Multer.File) {
         // Check User
         const checkUser = await this.userModel.findById(userId);
         if (!checkUser) {
@@ -54,7 +55,12 @@ export class BooksService {
         }
         book.coverUrl = uploadImage.secure_url;
 
-        
+        // Upload Book Image
+        const uploadPdf = await this.uploadcareService.uploadPdf(pdf);
+        if (!uploadPdf) {
+            throw new BadRequestException('Image upload failed');
+        }
+        book.contentUrl = uploadPdf.cdnUrl;
 
         // Update User
         const updateUserBooks = await this.userModel.findByIdAndUpdate(

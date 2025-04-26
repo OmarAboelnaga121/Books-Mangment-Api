@@ -7,6 +7,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { UserModule } from './user/user.module';
 import { BooksModule } from './books/books.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { UploadCareModule } from './upload-care/upload-care.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
     UserModule,
     BooksModule,
     CloudinaryModule,
+    UploadCareModule,
 
   ],
   controllers: [],

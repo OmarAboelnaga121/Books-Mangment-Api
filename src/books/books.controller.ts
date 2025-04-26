@@ -49,13 +49,24 @@ export class BooksController {
     @ApiResponse({ status: 401, description: 'Unauthorized' })
     @ApiResponse({ status: 500, description: 'Internal Server Error' })
     @ApiBody({ type: CreateBooksDto })
-    @UseInterceptors(FileInterceptor('bookImage'))
+    @UseInterceptors(
+        FileFieldsInterceptor([
+          { name: 'bookImage', maxCount: 1 },
+          { name: 'pdf', maxCount: 1 },
+        ])
+      )
     async createBooks(
         @Body() bookData: CreateBooksDto,
         @userProfile() user : userDto, 
-        @UploadedFile() bookImage: Express.Multer.File
+        @UploadedFiles()
+        files: {
+            bookImage: Express.Multer.File[],
+            pdf: Express.Multer.File[]
+        }
     ) { 
-        return this.booksService.createBook(bookData, user.id, bookImage);
+        const bookImage = files.bookImage?.[0];
+        const pdf = files.pdf?.[0];
+        return this.booksService.createBook(bookData, user.id, bookImage, pdf);
     }
     
     // Get User Books
