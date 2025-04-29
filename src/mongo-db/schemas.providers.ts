@@ -1,7 +1,7 @@
 
 import { Connection } from 'mongoose';
-import { BookSchema } from 'src/schemas/book.schema';
-import { UserSchema } from 'src/schemas/user.schema';
+import { BookSchema } from '../schemas/book.schema';
+import { UserSchema } from '../schemas/user.schema';
 
 export const schemasProviders = [
   {

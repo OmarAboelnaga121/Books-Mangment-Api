@@ -2,8 +2,8 @@ import { Body, Controller, Get, Put, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ThrottlerGuard } from '@nestjs/throttler';
-import { userProfile } from 'src/auth/decorators/user.decorator';
-import { userDto } from 'src/auth/dto/user.dto';
+import { userProfile } from '../auth/decorators/user.decorator';
+import { userDto } from '../auth/dto/user.dto';
 import { UserService } from './user.service';
 import { UserUpdateDto } from './dto/userUpdate.dto';
 

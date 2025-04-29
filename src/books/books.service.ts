@@ -1,12 +1,12 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { BookI } from 'src/mongo-db/book.interface';
-import { IUser } from 'src/mongo-db/user.interface';
+import { BookI } from '../mongo-db/book.interface';
+import { IUser } from '../mongo-db/user.interface';
 import { BooksDto } from './dto/books.dto';
-import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 import { CreateBooksDto } from './dto/createBook.dto';
 import { updateStatusDto } from './dto/updateStatus.dto';
-import { UploadcareService } from 'src/upload-care/upload-care.service';
+import { UploadcareService } from '../upload-care/upload-care.service';
 
 @Injectable()
 export class BooksService {

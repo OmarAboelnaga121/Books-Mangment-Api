@@ -5,7 +5,7 @@ import * as argon from 'argon2';
 import { loginDto } from './dto/login.dto';
 import { registerDto } from './dto/register.dto';
 import { JwtService } from '@nestjs/jwt';
-import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 
 @Injectable()
 export class AuthService {
