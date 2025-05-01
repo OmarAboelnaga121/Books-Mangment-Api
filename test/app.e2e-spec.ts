@@ -17,19 +17,39 @@ describe('App e2e', () => {
     await app.init();
     await app.listen(3333);
     request.setBaseUrl('http://localhost:3333');
-  });
+    
+  }, 10000);
 
   afterAll(async () => {
     if (app) {
       await app.close();
     }
-  });
+  }, 10000);
+
 
   describe('Health Check', () => {
     it('should return 404 for non-existent route', async () => {
       await spec()
         .get('/')
         .expectStatus(404);
-    }); // Added timeout for the test case
+    }); 
   });
+
+  describe('Auth', () => {
+    it('Successful Register', ()=>{
+      return spec()
+        .post('/auth/register')
+        .withJson({
+          "name": "Omar Wael",
+          "email": "p@o.com",
+          "password": "Password@1111",
+          "role": "admin",
+          "profileImageUrl": "string"
+        })
+        .withFile('profileImageUrl', 'test/test.png') 
+        .expectStatus(200);
+    })
+  })
+  describe('Users', () => {})
+  describe('Books', () => {})
 });
