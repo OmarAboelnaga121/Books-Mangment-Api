@@ -26,6 +26,72 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+# Books Management API
+
+A NestJS-based REST API for managing books with user authentication, file uploads, and caching.
+
+## Features
+
+- **Authentication**
+  - JWT-based authentication
+  - User registration and login
+  - Role-based access control (User, Admin, Seller)
+
+- **Book Management**
+  - CRUD operations for books
+  - File uploads (Book covers and PDF content)
+  - Book approval workflow
+  - Caching with Redis
+
+- **User Management**
+  - Profile management
+  - User roles and permissions
+  - Profile image upload
+
+## Upcoming Releases
+
+- **Unit Testing (Coming Soon)**
+  - Comprehensive test coverage for all modules
+  - Integration tests for API endpoints
+  - Mock services for external dependencies
+  - CI/CD pipeline integration
+
+## Tech Stack
+
+- **Framework**: NestJS
+- **Database**: MongoDB with Mongoose
+- **Caching**: Redis
+- **File Storage**: 
+  - Cloudinary (Images)
+  - UploadCare (PDFs)
+- **Authentication**: JWT with Passport
+- **API Documentation**: Swagger/OpenAPI
+- **Testing**: Jest and Pactum
+- **Rate Limiting**: Built-in ThrottlerModule
+
+## Prerequisites
+
+- Node.js (v14 or higher)
+- MongoDB
+- Redis
+- Cloudinary account
+- UploadCare account
+
+## Environment Variables
+
+Create `.env` file with:
+
+```env
+MONGO_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
+CLOUDINARY_NAME=your_cloudinary_name
+CLOUDINARY_API_KEY=your_cloudinary_key
+CLOUDINARY_API_SECRET=your_cloudinary_secret
+UPLOADCARE_PUBLIC_KEY=your_uploadcare_key
+REDIS_HOST=localhost
+REDIS_PORT=6379
+```
+
 ## Project setup
 
 ```bash
